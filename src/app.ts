@@ -6,6 +6,8 @@ import routerAdmin from "./router-admin";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import { MORGAN_FORMAT } from "./libs/config";
+import { Server as SocketIOServer } from "socket.io";
+import  http  from "http";
 
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
@@ -55,4 +57,23 @@ app.set("view engine", "ejs");
 app.use('/admin', routerAdmin); //BSSR: EJS framework uchun ishlatamiz
 app.use('/', router);           //SPA: REACT uchun ishlatamiz
 
-export default app;
+const server = http.createServer(app);
+const io = new SocketIOServer(server, {
+    cors: {
+        origin: true,
+        credentials:true,
+    }
+});
+
+let sumOfClients = 0;
+io.on("connection", (socket) =>{
+    sumOfClients++;
+    console.log(`Connected & total [${sumOfClients}]`);
+
+    socket.on("disconnect", () =>{
+        sumOfClients--;
+        console.log(`Disconnected & total [${sumOfClients}]`);
+    })
+});
+
+export default server;
