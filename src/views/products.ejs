@@ -25,7 +25,7 @@
       </ul>
     </div>
 
-    <div class="restaurant-menu-frame">
+    <div class="product-menu-frame">
       <div class="board">
         <button class="btn " id="product-show">All Products</button>
         <div class="dishes-table">
@@ -68,19 +68,20 @@
                   <select class="spec-select new-product-status" id="<%= value._id %>">
                     <option value="PAUSE"   <%= value.productStatus === 'PAUSE' ? 'selected': '' %> >PAUSE</option>
                     <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected': '' %> >PROCESS</option>
-                    <option value="DELETE"  <%= value.productStatus === 'RECOMEND' ? 'selected': '' %> >RECOMEND</option>
+                    <option value="RECOMEND"  <%= value.productStatus === 'RECOMEND' ? 'selected': '' %> >RECOMEND</option>
                     <option value="DELETE"  <%= value.productStatus === 'DELETE' ? 'selected': '' %> >DELETE</option>
                   </select>
                 </td>
-                <td><input
-                  type="number"
-                  id="input"
-                  name="salePrice"
-                  class="salePrice"
-                  onchange="SalePrice(this,id)"
-                />
-                  
+                <td>
+                  <input
+                    type="number"
+                    id="<%= value._id %>"
+                    name="salePrice"
+                    class="salePrice"
+                    onkeydown="if(event.key === 'Enter') { SalePrice(this.value, this.id); return false; }"
+                  />
                 </td>
+              
               </tbody>
             <% }) %>
             
@@ -100,7 +101,7 @@
           onsubmit="return validateForm()"
           action="/admin/product/create"
           method="POST"
-          class="dish-container"
+          class="product-container"
           enctype="multipart/form-data"
         >
           <div class="long-input" style="display: flex; align-items: center">

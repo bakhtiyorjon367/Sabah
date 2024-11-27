@@ -23,7 +23,7 @@ class ProductService{
   /** SPA ________________________________________________________________*/
   public async getProducts(inquiry: ProductInquiry): Promise<Product[]> {
 
-    const match: T ={productStatus: ProductStatus.PROCESS};
+    const match: T ={productStatus: { $in: [ProductStatus.PROCESS, ProductStatus.RECOMEND] }};
   
     if(inquiry.productType) 
       match.productType = inquiry.productType;
@@ -34,6 +34,10 @@ class ProductService{
       delete(match.productType);
       match.productPrice = {$gte: 0, $lte:20 }
     } 
+    if(inquiry.productStatus) 
+      match.productStatus = inquiry.productStatus;
+    
+
     const sort: T =
       inquiry.order === "productPrice" 
       ? {[inquiry.order]: 1} 
@@ -56,7 +60,7 @@ class ProductService{
   public async getProduct(memberId:ObjectId | null, id:string):Promise<Product>{
     const productId = shapeIntoMongooseObjectId(id);
 
-    let result = await this.productModel.findOne({_id: productId, productStatus: ProductStatus.PROCESS}).exec();
+    let result = await this.productModel.findOne({_id: productId, productStatus: { $in: [ProductStatus.PROCESS, ProductStatus.RECOMEND] }}).exec();
 
     if(!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     

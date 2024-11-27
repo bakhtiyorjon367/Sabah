@@ -28,7 +28,7 @@ class OrderService {
         console.log( "OrderService.createOrder()");
         const memberId = shapeIntoMongooseObjectId(member._id);
         const amount = input.reduce((accumulator:number, item:OrderItemInput) => {
-            return accumulator + item.itemPrice * item.itemQuantity;
+            return accumulator + (item.salePrice ? (item.itemPrice - item.salePrice) * item.itemQuantity : item.itemPrice * item.itemQuantity);
         },0);
         const delivery = amount < 100 ? 5 : 0;
         console.log(amount, delivery);
