@@ -6,6 +6,7 @@ export interface OrderItem {
     _id: ObjectId;
     itemQuantity: number;
     itemPrice: number;
+    salePrice?: number;
     orderId: ObjectId;
     productId: ObjectId;
     createdAt: Date;
@@ -16,6 +17,7 @@ export interface Order{
     _id:    ObjectId;
     orderTotal:   number;
     orderDelivery:number;
+    salePrice:    number;
     orderStatus:  OrderStatus;
     memberId:     ObjectId;
     createdAt:     Date;
@@ -28,6 +30,7 @@ export interface Order{
 export interface OrderItemInput {
     itemQuantity: number;
     itemPrice:    number;
+    salePrice: number;
     productId:    ObjectId;
     orderId?:     ObjectId;
 }

@@ -12,7 +12,11 @@ const orderSchema = new Schema(
             type:Number,
             required:true,
         },
-
+        salePrice:{
+            type:Number,
+            required:true,
+            default:0,
+        },
         orderStatus:{
             type:String,
             enum:OrderStatus, 

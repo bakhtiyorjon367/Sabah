@@ -31,7 +31,7 @@
   font-family: monospace;
 }
 
-.products-container .restaurant-menu-frame {
+.products-container .product-menu-frame {
   position: relative;
   padding-bottom: 80px;
   width: 100%;
@@ -41,11 +41,11 @@
   flex-direction: column;
   align-items: center;
 }
-.products-container .restaurant-menu-frame .board .btn a{
+.products-container .product-menu-frame .board .btn a{
   color: #030303;
 }
 
-.products-container .restaurant-menu-frame .board {
+.products-container .product-menu-frame .board {
   position: relative;
   margin-top: 100px;
   width: 1320px;
@@ -65,7 +65,7 @@
   align-items: center;
 }
 
-.products-container .board .dish-container {
+.products-container .board .product-container {
   position: relative;
   margin-top: 20px;
   width: 100%;
@@ -183,7 +183,7 @@
   color: #4f547b;
 }
 
-.products-container .dish-container .half-input-frame {
+.products-container .product-container .half-input-frame {
   position: relative;
   margin-top: 25px;
   width: 100%;
