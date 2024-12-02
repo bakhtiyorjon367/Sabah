@@ -2,7 +2,7 @@
 
 #Production
 git reset --hard
-git chckout master
+git checkout master
 git pull origin master
 npm i 
 npm run build
